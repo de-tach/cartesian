@@ -1,24 +1,24 @@
 package cartesian
 
 // Iter takes interface-slices and returns a channel, receiving cartesian products
-func Iter(params ...[]interface{}) chan []interface{} {
+func Iter[T any](params ...[]T) chan []T {
 	// create channel
-	c := make(chan []interface{})
+	c := make(chan []T)
 	if len(params) == 0 {
 		close(c)
 		return c // Return a safe value for nil/empty params.
 	}
 	go func() {
-		iterate(c, params[0], []interface{}{}, params[1:]...)
+		iterate(c, params[0], []T{}, params[1:]...)
 		close(c)
 	}()
 	return c
 }
 
-func iterate(channel chan []interface{}, topLevel, result []interface{}, needUnpacking ...[]interface{}) {
+func iterate[T any](channel chan []T, topLevel, result []T, needUnpacking ...[]T) {
 	if len(needUnpacking) == 0 {
 		for _, p := range topLevel {
-			channel <- append(append([]interface{}{}, result...), p)
+			channel <- append(append([]T{}, result...), p)
 		}
 		return
 	}

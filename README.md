@@ -12,7 +12,7 @@ keep in mind, that because [how golang handles maps](https://blog.golang.org/go-
 In order to start, `go get` this repository:
 
 ```
-go get github.com/schwarmco/go-cartesian-product
+go get github.com/de-tach/cartesian
 ```
 
 ## Usage
@@ -20,11 +20,11 @@ go get github.com/schwarmco/go-cartesian-product
 ```go
 import (
     "fmt"
-    "github.com/schwarmco/go-cartesian-product"
+    "github.com/de-tach/cartesian"
 )
 
 func main() {
-    
+
     a := []interface{}{1,2,3}
     b := []interface{}{"a","b","c"}
 
@@ -50,17 +50,9 @@ func main() {
 
 ## Working with Types
 
-Because you are giving interfaces to Iter() and golang doesn't support mixed-type-maps (which is why i created this package) you have to assert types, when you do function-calls or something like that:
-
-```go
-
-func someFunc(a int, b string) {
-    // some code
-}
-
-// ...
-
-for product := range c {
-    someFunc(product[0].(int), product[1].(string))
-}
-```
+The original code used the idea of using `interface{}` types which makes the code
+less ideal when you know you only want to handle the same type of object. So for
+example, if we know that if we have a set $X, Y \subset Z$ then we know that the
+type space of this cartesian product is $X \cross Y$. For this problem the new
+generics are quite ideal and should be easy to use without breaking the original
+source API.
