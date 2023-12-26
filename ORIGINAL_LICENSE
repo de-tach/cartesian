@@ -1,6 +1,8 @@
+This code is a fork of `schwarmco/go-cartesian-product` which was licenced under the following license.
+
 MIT License
 
-Copyright (c) 2023 De-Tach Ltd
+Copyright (c) 2017 Joachim Schwarm
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
